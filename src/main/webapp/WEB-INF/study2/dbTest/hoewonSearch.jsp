@@ -7,18 +7,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>hoewonSearch.jsp</title>
-  
-<%@ include file="/include/bs5.jsp" %>
-
+  <%@ include file="/include/bs5.jsp" %>
 </head>
 <body>
-
 <jsp:include page="/include/header.jsp" />
 <jsp:include page="/include/nav.jsp" />
-
 <p><br/></p>
 <div class="container">
-	<h2 class="text-center">개별회원 정보 검색결과</h2>
+  <h2>개별 회원 정보 검색 결과</h2>
   <hr/>
   <div>성명 : ${vo.name}</div>
   <div>나이 : ${vo.age}</div>
@@ -30,5 +26,4 @@
 <p><br/></p>
 <jsp:include page="/include/footer.jsp" />
 </body>
-
 </html>

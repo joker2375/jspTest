@@ -11,12 +11,12 @@ public class HoewonListCommand implements HoewonInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			HoewonDAO dao = new HoewonDAO(); 
-			
-			List<HoewonVO> vos = dao.getHoewonList();
-			
-			request.setAttribute("vos", vos);
-			
+		HoewonDAO dao = new HoewonDAO();
+
+		List<HoewonVO> vos = dao.getHoewonList();
+		
+		request.setAttribute("vos", vos);
+		
 	}
 
 }

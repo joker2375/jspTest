@@ -37,10 +37,10 @@ public class HoewonVO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
 	@Override
 	public String toString() {
 		return "HoewonVO [idx=" + idx + ", name=" + name + ", age=" + age + ", gender=" + gender + ", address=" + address
 				+ "]";
 	}
-	
 }

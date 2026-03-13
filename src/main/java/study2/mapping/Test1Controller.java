@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
-@WebServlet("/mapping/Test1")
+@WebServlet({"/mapping/Test1","/mapping/test1"})
 public class Test1Controller extends HttpServlet {
 	
 	@Override

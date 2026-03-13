@@ -4,21 +4,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>boardUpdate.jsp</title>
-	<%@ include file="/include/bs5.jsp" %>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>boardUpdate.jsp</title>
+  <%@ include file="/include/bs5.jsp" %>
 </head>
 <body>
 <jsp:include page="/include/header.jsp" />
 <jsp:include page="/include/nav.jsp" />
 <p><br/></p>
 <div class="container">
-	<h2>게시판 자료 수정</h2>
-	<hr/>
-	<div>메세지 : ${msg}</div>
-	<hr/>
-	<h3>게시판 글 수정</h3>
+  <h2>게시판 자료 수정</h2>
+  <hr/>
+  <div>메세지 : ${msg}</div>
+  <hr/>
+  <h3>게시판 글 수정</h3>
   <form name="myform" method="post" action="boardUpdateOk.re">
 	  <table class="table table-bordered">
 	    <tr>
@@ -37,8 +37,8 @@
 	    </tr>
 	  </table>
   </form>
-	<hr/>
-	<div><a href="__.do" class="btn btn-success">돌아가기</a></div>
+  <hr/>
+  <div><a href="___.do" class="btn btn-success">돌아가기</a></div>
 </div>
 <p><br/></p>
 <jsp:include page="/include/footer.jsp" />

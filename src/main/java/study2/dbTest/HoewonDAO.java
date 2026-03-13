@@ -56,6 +56,7 @@ public class HoewonDAO {
 			} catch (SQLException e) {}
 		}
 	}
+
 	// 전체 회원 목록 보기
 	public List<HoewonVO> getHoewonList() {
 		List<HoewonVO> vos = new ArrayList<>();
@@ -72,17 +73,15 @@ public class HoewonDAO {
 				vo.setGender(rs.getString("gender"));
 				vo.setAddress(rs.getString("address"));
 				vos.add(vo);
-			}	
-			
+			}
 		} catch (SQLException e) {
 			System.out.println("SQL 오류(getHoewonList) + " + e.getMessage());
 		} finally {
 			rsClose();
 		}
-		
 		return vos;
 	}
-	
+
 	// 회원 등록 처리
 	public int setHoewonInputOk(HoewonVO vo) {
 		int res = 0;
@@ -97,11 +96,11 @@ public class HoewonDAO {
 		} catch (SQLException e) {
 			System.out.println("SQL 오류(setHoewonInputOk) + " + e.getMessage());
 		} finally {
-			rsClose();
+			pstmtClose();
 		}
 		return res;
 	}
-	
+
 	// 개별회원 검색
 	public HoewonVO getHoewonSearch(String name) {
 		HoewonVO vo = new HoewonVO();
@@ -119,7 +118,7 @@ public class HoewonDAO {
 				vo.setAddress(rs.getString("address"));
 			}
 		} catch (SQLException e) {
-			System.out.println("SQL 오류(setHoewonInputOk) + " + e.getMessage());
+			System.out.println("SQL 오류(getHoewonSearch) + " + e.getMessage());
 		} finally {
 			rsClose();
 		}
@@ -138,13 +137,13 @@ public class HoewonDAO {
 			pstmt.setString(4, vo.getName());
 			res = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("SQL 오류(setHoewonInputOk) + " + e.getMessage());
+			System.out.println("SQL 오류(getHoewonSearch) + " + e.getMessage());
 		} finally {
 			pstmtClose();
 		}
 		return res;
 	}
-	
+
 	// 회원 정보 삭제 처리
 	public int setHoewonDelete(String name) {
 		int res = 0;
@@ -154,7 +153,7 @@ public class HoewonDAO {
 			pstmt.setString(1, name);
 			res = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("SQL 오류(setHoewonInputOk) + " + e.getMessage());
+			System.out.println("SQL 오류(getHoewonSearch) + " + e.getMessage());
 		} finally {
 			pstmtClose();
 		}

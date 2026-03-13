@@ -27,7 +27,6 @@ public class HoewonInputOkCommand implements HoewonInterface {
 			return;
 		}
 		
-		
 		vo.setName(name);
 		vo.setAge(age);
 		vo.setGender(gender);
@@ -42,9 +41,8 @@ public class HoewonInputOkCommand implements HoewonInterface {
 			request.setAttribute("url", "HoewonList.db");
 		}
 		else {
-			request.setAttribute("message", "회원 가입 실패~~~");
+			request.setAttribute("message", "회원 가입 실패~~");
 			request.setAttribute("url", "HoewonInput.db");
-			
 		}
 	}
 

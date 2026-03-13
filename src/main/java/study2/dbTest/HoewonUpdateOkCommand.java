@@ -23,7 +23,6 @@ public class HoewonUpdateOkCommand implements HoewonInterface {
 		vo.setGender(gender);
 		vo.setAddress(address);
 		
-		
 		// 회원 정보 수정처리
 		int res = dao.setHoewonUpdateOk(vo);
 		
@@ -32,9 +31,8 @@ public class HoewonUpdateOkCommand implements HoewonInterface {
 			request.setAttribute("url", "HoewonList.db");
 		}
 		else {
-			request.setAttribute("message", "회원 정보 수정 실패~~~");
+			request.setAttribute("message", "회원 정보 수정 실패~~");
 			request.setAttribute("url", "HoewonUpdate.db?name="+name);
-			
 		}
 	}
 

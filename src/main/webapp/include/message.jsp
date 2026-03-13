@@ -4,15 +4,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>message.jsp</title>
-	<script>
-		'use strict';
-		
-		if('${message}' != '' ) alert('${message}');
-		location.href = '${url}';
-	</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>message.jsp</title>
+  <script>
+    'use strict';
+    
+    if('${message}' != '' ) alert('${message}');
+    location.href = '${url}';
+  </script>
 </head>
 <body>
 

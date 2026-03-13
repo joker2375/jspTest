@@ -23,6 +23,8 @@ public class T2_init extends HttpServlet {
 		session.setAttribute("sLogoName", logoName);
 		session.setAttribute("sHomeAddress", homeAddress);
 		
+		
+		
 		String viewPage = "/study/0303/t2_init.jsp";
 		request.getRequestDispatcher(viewPage).forward(request, response);
 	}

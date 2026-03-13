@@ -5,18 +5,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>hoewonList.jsp</title>
-	<%@ include file="/include/bs5.jsp" %>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>hoewonList.jsp</title>
+  <%@ include file="/include/bs5.jsp" %>
 </head>
 <body>
 <jsp:include page="/include/header.jsp" />
 <jsp:include page="/include/nav.jsp" />
 <p><br/></p>
 <div class="container">
-	<h2 class="text center mb-3">회 원 리 스 트</h2>
-	<table class="table table-hover">
+  <h2 class="text-center mb-3">회 원 리 스 트</h2>
+  <table class="table table-hover">
     <tr class="table-secondary">
     	<th>번호</th>
     	<th>성명</th>

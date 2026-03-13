@@ -30,7 +30,7 @@ public class ReController extends HttpServlet {
 			viewPage += "boardInput";
 		}
 		else if(com.equals("boardInputOk")) {
-			command = new BoardInputOKCommand();
+			command = new BoardInputOkCommand();
 			command.execute(request, response);
 			viewPage = "/include/message";
 		}
@@ -49,20 +49,10 @@ public class ReController extends HttpServlet {
 			command.execute(request, response);
 			viewPage += "boardDelete";
 		}
-		else if(com.equals("boardDeleteOk")) {
-			command = new BoardDeleteOkCommand();
-			command.execute(request, response);
-			viewPage = "/include/message";
-		}
 		else if(com.equals("boardSearch")) {
 			command = new BoardSearchCommand();
 			command.execute(request, response);
 			viewPage += "boardSearch";
-		}
-		else if(com.equals("boardSearchOk")) {
-			command = new BoardSearchOkCommand();
-			command.execute(request, response);
-			viewPage = "/include/message";
 		}
 		
 		viewPage += ".jsp";

@@ -1,18 +1,12 @@
 package study.j0225;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebInitParam;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import study.vo.TestVO;
 
 @SuppressWarnings("serial")
 //@WebServlet("/j0225/Jstl5")
@@ -32,8 +26,8 @@ public class Jstl5 extends HttpServlet {
 		Date today = new Date();
 		request.setAttribute("today", today);
 		
-		//초기값 설정 연습.
-		String logoName2 = getInitParameter("iogoName2");
+		// 초기값 설정 연습.
+		String logoName2 = getInitParameter("logoName2");
 		request.setAttribute("logoName2", logoName2);
 		System.out.println("logoName2 : " + logoName2);
 		

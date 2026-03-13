@@ -10,8 +10,8 @@ public class BoardUpdateOkCommand implements ReInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String name= request.getParameter("name")==null ? "" : request.getParameter("name");
-		String content= request.getParameter("content")==null ? "" : request.getParameter("name");
+		String name = request.getParameter("name")==null ? "" : request.getParameter("name");
+		String content = request.getParameter("content")==null ? "" : request.getParameter("content");
 		
 		System.out.println("올린이 : " + name + ", 내용 : "+content+" , 이곳에서 게시판 DB에 수정처리한다.");
 		

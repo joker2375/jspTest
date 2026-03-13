@@ -24,12 +24,12 @@
     	}
     	else if(flag == 4) {
     		alert("이곳은 flag값이 4입니다.");
-    		//myform.action = "${ctp}/mapping/test1";
+    		//location.href = "${ctp}/mapping/test1";
     		
     		let msg = myform.msg.value;
     		let su1 = myform.su1.value;
     		let su2 = myform.su2.value;
-    		myform.action = "${ctp}/mapping/test1$msg="+msg+"&su1="+su1+"&su2="+su2;
+    		location.href = "${ctp}/mapping/test1?msg="+msg+"&su1="+su1+"&su2="+su2;
     	}
     }
   </script>
@@ -39,17 +39,17 @@
 <jsp:include page="/include/nav.jsp" />
 <p><br/></p>
 <div class="container">
-  <h2>이곳은 test1.jsp(/WEB-INF/study2/test) : 디렉토리패턴 연습</h2>
+  <h2>이곳은 test1.jsp(/WEB-INF/study2/test) : 디렉토리패턴연습</h2>
   <hr/>
   <div>전송 메세지 : ${msg}</div>
   <hr/>
   <form name="myform" method="post" action="${ctp}/mapping/Test1">
 	  <div class="row">
-	    <div class="col"><input type="submit" value="1.두수의 합/차" class="btn btn-success"/></div>
+	    <div class="col"><input type="submit" value="1.두수의 합/차" class="btn btn-success btn-sm"/></div>
 	    <div class="col"><input type="button" value="2.두수의 합/차" onclick="fCheck(2)" class="btn btn-primary btn-sm"/></div>
-	    <div class="col"><input type="button" value="3.두수의 합/차" onclick="fCheck(3)" class="btn btn-info btn-sm""/></div>
-	    <div class="col"><input type="button" value="4.두수의 합/차" onclick="fCheck(4)" class="btn btn-secondary btn-sm""/></div>
-	    <div class="col"><input type="button" value="0.새로고침" onclick="location.href='${ctp}/mapping/Test1'" class="btn btn-warning btn-sm""/></div>
+	    <div class="col"><input type="button" value="3.두수의 합/차" onclick="fCheck(3)" class="btn btn-info btn-sm"/></div>
+	    <div class="col"><input type="button" value="4.두수의 합/차" onclick="fCheck(4)" class="btn btn-secondary btn-sm"/></div>
+	    <div class="col"><input type="button" value="0.새로고침" onclick="location.href='${ctp}/mapping/Test1'" class="btn btn-warning btn-sm"/></div>
 	  </div>
 	  <hr/>
 	  <div class="mb-2">su1 : <input type="number" name="su1" value="10" class="form-control"></div>

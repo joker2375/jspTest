@@ -14,19 +14,16 @@ public class HoewonDeleteCommand implements HoewonInterface {
 		
 		HoewonDAO dao = new HoewonDAO();
 		
-		System.out.println("deleteOllll");
-		
 		// 회원 정보 삭제처리
 		int res = dao.setHoewonDelete(name);
-		System.out.println("res : " + res);
+		
 		if(res != 0) {
 			request.setAttribute("message", "회원 정보가 삭제 되었습니다.");
 			request.setAttribute("url", "HoewonList.db");
 		}
 		else {
-			request.setAttribute("message", "회원 정보 삭제 실패~~~");
+			request.setAttribute("message", "회원 정보 삭제 실패~~");
 			request.setAttribute("url", "DbTest.db");
-			
 		}
 	}
 

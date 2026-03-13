@@ -29,6 +29,7 @@ public class BoardListCommand implements ReInterface {
 		}
 		request.setAttribute("vos", vos);
 		
+		
 		request.setAttribute("msg", "전체리스트 완료!!!");
 	}
 
