@@ -1,6 +1,6 @@
 /* 도서관리 프로젝트에 사용하는 테이블 설계 */
 
-/* 첵(books)테이블 */
+/* 책(books)테이블 */
 create table books (
   bookid    int  not null  auto_increment,  /* 책 고유번호 */
   bookname  varchar(20) not null,           /* 책 이름 */
@@ -29,11 +29,10 @@ INSERT INTO books VALUES(17, '나눌수 있을때', '나무수', 9000);
 INSERT INTO books VALUES(18, '함박눈 내리는날', '이상미디어', 15000);
 INSERT INTO books VALUES(19, '나보다 축구를', '굿스포츠', 23000);
 INSERT INTO books VALUES(20, '시작했을때 한번더', '삼성당', 19000);
-
-  select * from books;
   
-  -- 고객 테이블------
-  create table customer (
+  
+-- 고객 테이블
+create table customer (
   custid   int  not null  auto_increment,   /* 고객 고유번호 */
   name     varchar(20) not null,            /* 고객명 */
   address  varchar(20) not null,            /* 고객 기본주소 */
@@ -51,10 +50,8 @@ INSERT INTO customer VALUES (6, '이순신', '대한민국 아산',  '001-0009-0
 INSERT INTO customer VALUES (7, '소나무', '대한민국 청주',  '000-1100-0050');
 
   
-  select * from customer;
-  
-  -- 주문 테이블--------
-  create table orders (
+-- 주문테이블
+create table orders (
   orderid   int  not null  auto_increment,  /* 주문 고유번호 */
   custid    int  not null,                  /* 고객의 고유번호 */
   bookid    int  not null,                  /* 책의 고유번호 */
@@ -64,6 +61,7 @@ INSERT INTO customer VALUES (7, '소나무', '대한민국 청주',  '000-1100-0
   foreign key(custid) references customer(custid) on update cascade on delete restrict,
   foreign key(bookid) references books(bookid) on update cascade on delete restrict
 );
+
 INSERT INTO orders VALUES (1, 1, 1, 6000, '2019-08-01'); 
 INSERT INTO orders VALUES (2, 1, 3, 21000, '2018-09-03');
 INSERT INTO orders VALUES (3, 2, 5, 8000, '2022-11-03'); 
@@ -84,19 +82,19 @@ INSERT INTO orders VALUES (17, 1, 12, 23000, '2025-02-26');
 INSERT INTO orders VALUES (18, 2, 11, 13000, '2025-09-16');
 INSERT INTO orders VALUES (19, 4, 20, 13000, '2026-03-20');
 INSERT INTO orders VALUES (20, 4, 15, 20000, '2026-04-26');
-
+  
 select * from books;
-select * from customer;  
+select * from customer;
 select * from orders;
-select * from orders order by custid;
 
 drop table books;
 drop table customer;
 drop table orders;
 
+delete from orders;
+
 -- 도서테이블의 있는 모든 출판사를 검색하시오(단, 같은 출판사의 정보는 1회만 출력하시오)
-select publisher from books group by publisher;
-SELECT DISTINCT publisher FROM books;
+select distinct publisher from books;
 
 -- 도서이름 두번째 글자뒤에 '구'로 끝나는 문자열을 갖는 도서를 출력?
 select * from books where bookname like '_구%';
@@ -106,15 +104,11 @@ select * from orders where custid=1;
 select sum(saleprice),format(avg(saleprice),0),max(saleprice),min(saleprice) from orders where custid=1;
 
 -- 고객별로 주문한 도서의 총 수량과 총 판매액을 구하시오
-select c.name 고객, count(*) 수량, sum(o.saleprice) 판매액 from customer c join orders o on c.custid = o.custid group by c.custid;
-select countId, count(*), sum(saleprice) from orders group by custId;
+select custId, count(*), sum(saleprice) from orders group by custId;
 
 -- 고객별로 주문한 도서의 총 수량과 총 판매액을 구하시오(구매 날짜순으로...)
-select  orderId, orderdate as 구매날짜 from orders order by orderdate;
-select custId,orderdate as 구매날짜, count(*), sum(saleprice) from orders group by custId order by orderdate;
-select custId, orderdate as 구매날짜, count(*), sum(saleprice) from orders group by custId, orderdate order by orderdate;
-
--- SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
+select orderId, orderdate as 구매날짜 from orders order by orderdate;
+select custId, orderdate as 구매날짜, count(*), sum(saleprice) from orders group by custId order by orderdate;
 
 -- 1번이상 구매한 책들의 정보?(구매날짜순 출력, 같은책은 1번씩만 출력)
 select * from orders;
@@ -125,15 +119,52 @@ select * from orders group by bookid;
 select o.orderid,o.custid,b.bookid,b.bookname from orders o, books b where o.bookid=b.bookid group by b.bookid order by o.orderdate;
 
 -- 1번이상 구매한 책들의 정보?(주문번호, 주문날짜, 책 이름, 정가, 세일가 출력)
-SELECT o.orderid,o.custid,b.bookid,b.bookname,b.price,o.saleprice
- FROM orders o, books b
- WHERE o.bookid=b.bookid GROUP BY b.bookid ORDER BY o.orderdate;
-
+SELECT o.orderid,o.orderdate,b.bookname,b.price,o.saleprice
+  FROM orders o, books b 
+  WHERE o.bookid=b.bookid GROUP BY b.bookid ORDER BY o.orderdate;
+  
 -- '책을 구매한 사람의 이름/책이름/구매가격/구매날짜'를 모두출력?
+
 select c.name, b.bookname,o.saleprice,o.orderdate from orders o, books b, customer c
 	where o.bookid=b.bookid and o.custid=c.custid;
-
+    
 select c.name, b.bookname,o.saleprice,o.orderdate from orders o, books b, customer c
 	where o.bookid=b.bookid and o.custid=c.custid order by c.name;
-
+    
 select o.*,c.name from orders o, customer c where o.custid=c.custid order by orderdate desc;
+
+select o.*,c.name,b.bookname from orders o, customer c, books b where o.custid=c.custid and o.bookid=b.bookid order by orderdate desc;
+
+-- '책을 구매한 사람의 이름/책이름/구매가격/구매날짜'를 모두출력?
+-- 단, 구매자가 구매한 책의 권수를 함께 출력
+
+
+-- '책을 구매한 사람의 이름/책이름/구매가격/구매날짜'를 모두출력?
+-- 단, 구매자가 구매한 책의 '총개수,총가격,총가격평균'을  함께 출력
+
+
+-- '책을 구매한 사람의 이름/책이름/구매가격/구매날짜'를 모두출력?
+-- 단, 구매자가 구매한 책의 '총개수,총가격,총가격평균'을  함께 출력
+-- 단, 구매한 책이 4권 이상인 자료만 출력?
+
+
+-- '출판사'가 '굿스포츠' 혹은 '대한미디어'인 도서를 검색하시오?
+
+
+-- '출판사'가 '굿스포츠' 혹은 '대한미디어'가 아닌 도서를 검색하시오?
+
+
+-- '축구' 또는 '야구'에 관한 도서중 가격이 2만원 이상인 도서의 '도서명, 가격, 출판사명' 출력?
+
+
+-- 2023년에만 구매된 책들을 출력?
+
+
+-- 2023년에 가장 많이 판매된 책을 출력?
+
+
+-- 2023년 5월 1일부터 최근까지 판매된 책?(최근 내림차순 출력)
+
+
+
+-- 각 고객별로 주문한 도서의 총 판매액을 출력하되, 고객 이름순으로 출력하시오(고객명, 총판매액 출력)

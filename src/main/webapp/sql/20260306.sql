@@ -1,3 +1,4 @@
+-- -----------------학생 테이블-----------------------
 create table students (
   hakbun int not null,
   name   varchar(10) not null,
@@ -30,31 +31,31 @@ SELECT NAME, age FROM students where age > 20;
 select * from students where age != 21;
 select * from students where age <> 21;
 
--- students테이블의 나이가 21살이상 22살 이하인 학생을 보여주시오?(between ~ and)
+-- students테이블의 나이가 21살이상 23살 이하인 학생을 보여주시오?(between ~ and)
 select * from students where age >= 21 and age <= 23;
 select * from students where age between 21 and 23;
 
 -- students테이블의 나이가 20살 또는 21살 또는 23살인 학생을 보여주시오?(in연산자)
 select * from students where age = 20 or age = 21 or age = 23;
-select * from students where age in (20, 21 ,23);
+select * from students where age in (20, 21, 23);
 
--- students테이블의 나이가 20살 또는 21살 또는 22살이 아닌 학생을 보여주시오?
-select * from students where age not in (20, 21 ,23);
+-- students테이블의 나이가 20살 또는 21살 또는 22살이 아닌 학생을 보여주시오
+select * from students where age not in (20, 21, 23);
 
--- '성'과 '이름'을 분리해서 출력하시오?
-select *, substring(name,1,1),substring(name,2) from students;
-select *, left(name,1),substring(name,2) from students;
+-- '성'과 '이름'을 분리해서 출력하시오
+select *, substring(name,1,1), substring(name,2) from students;
+select *, left(name,1), substring(name,2) from students;
 
 -- 앞에서 분리한 '성'과 '이름'을 다시 결합후 '성명'이란 필드명으로 출력하시오.(concat())
-select *, left(name,1),substring(name,2), concat(left(name,1),substring(name,2)) as 성명 from students;
+select *, left(name,1), substring(name,2), concat(left(name,1), substring(name,2)) as 성명  from students;
 
--- 앞에서 분리한 '성'과 '이름'중간에 공백을 한칸 넣어서 다시 결합후 '성명'이란 필드명으로 출력하시오.(concat())
-select *, left(name,1),substring(name,2), concat(left(name,1), ' ',substring(name,2)) as 성명 from students;
-select *, left(name,1),substring(name,2), concat(left(name,1), space(2), substring(name,2)) as 성명 from students;
+-- 앞에서 분리한 '성'과 '이름'중간에 공백을 두칸 넣어서 다시 결합후 '성명'이란 필드명으로 출력하시오.(concat())
+select *, left(name,1), substring(name,2), concat(left(name,1), '  ', substring(name,2)) as 성명  from students;
+select *, left(name,1), substring(name,2), concat(left(name,1), space(2), substring(name,2)) as 성명  from students;
 
--- 합치기 : Oracle -> || , MS SQL -> '+'
+-- 합치기 : Oracle -> '||' , MS SQL -> '+'
 
-------------------------------- 과목 테이블-----------------------------
+-- -----------------과목 테이블-----------------------
 create table kwamok (
   code  int  not null
 );
@@ -88,8 +89,8 @@ select code,
     end as 과목명
   from kwamok;
   
-  -- jumun 테이블 ------------
-  create table jumun (
+-- jumun 테이블....------------------
+create table jumun (
   no  int not null,
   ilja datetime default now()
 );
@@ -128,7 +129,7 @@ insert into products values ('라면시대', 1900);
 insert into products values ('신_라면', 2200);
 
 select * from products;
--- % : 모든문자 대변, _ : 1개문자를 대변
+-- % : 모든문자 대변,  _ : 1개문자를 대변
 
 -- 상품명에 '면'으로 끝나는 모든제품 출력?
 select * from products where productName like '%면';
@@ -145,7 +146,7 @@ select * from products where productName like '_라_';
 -- 상품명이 '_라면'으로 끝나는 자료만 출력?
 select * from products where productName like '%\_라면';
 
--- jobs 테이블 ----------------------------
+-- jobs 테이블 -------------------------------
 create table jobs (
   no  int not null,
   job varchar(10)
@@ -162,15 +163,15 @@ insert into jobs values (7, default);
 select * from jobs order by no desc;
 
 -- 직업이 null 인 자료만 출력?(is null)
-select * from jobs where job = null order by no desc; -- (x)
-select * from jobs where job is null order by no desc; -- (o)
-select * from jobs where job is not null order by no desc;-- (o)
+select * from jobs where job = null order by no desc; -- (X)
+select * from jobs where job is null order by no desc; -- (O)
+select * from jobs where job is not null order by no desc; -- (O)
 
 -- 직업이 기재된 자료의 전체수는?
 select count(*) from jobs;
 select count(*) from jobs where job is not null;
 
--- jikwon 테이블--------------------------alter
+-- jikwon테이블 -----------------
 create table jikwon (
   no  int not null,
   buseo varchar(10) not null,
@@ -193,11 +194,12 @@ insert into jikwon values (110, '기획', 700, 100);
 
 select * from jikwon;
 
--- 집계함수 : sum() avg(), count(), max(), min().... : group by ~ having ~
+-- 집계함수 : sum(), avg(), count(), max(), min().... : group by ~ having ~
 
--- 직원들의 평균급여를 구하시오. 필드명은 '평균급여'로 출력하시오.(합계, 최대, 최소, 건수)
+-- 직원들의 '평균급여'를 구하시오. 필드명은 '평균급여'로 출력하시오.(합계, 최대, 최소, 건수)
 select buseo, avg(pay) as 평균급여 from jikwon group by buseo;
-select buseo, sum(pay) as 전체급여 , avg(pay) as 평균급여 , max(pay) as 최대급여 , min(pay) as 최소급여 , count(pay) as 건수급여 from jikwon group by buseo;
+select buseo, sum(pay) as 전체급여 , avg(pay) as 평균급여 , max(pay) as 최대급여 , min(pay) as 최소급여 , count(pay) as 건수 from jikwon group by buseo;
+
 -- 앞의 결과에 천단위 쉼표표시, 소수이사 버리기(format())
 select buseo, format(avg(pay), 0) as 평균급여 from jikwon group by buseo;
 
@@ -213,6 +215,7 @@ select buseo, format(avg(pay), 0) as 평균급여 from jikwon where buseo!='기�
 -- 부서별 평균급여를 출력하되 평균급여가 1000원 이상하는 자료중 '기획'부서외의 자료만 평균급여 내림차순 출력?
 select buseo, format(avg(pay), 0) as 평균급여 from jikwon where buseo!='기획' group by buseo having avg(pay) >= 1000 order by avg(pay) desc;
 select buseo, format(avg(pay), 0) as 평균급여 from jikwon where buseo!='기획' group by buseo having avg(pay) >= 1000 order by 평균급여 desc;
+
 
 -- 정규화로 분리된 테이블을 join으로 검색처리
 create table buseos (
@@ -245,14 +248,15 @@ select * from jikwons;
 
 -- 일반조인(Inner join)
 -- 각 직원들의 이름과 부서명을 출력?
-select name,buseoName from buseos join jikwons on jikwons.buseosId = buseos.buseoId;
-select name,buseoName from buseos b join jikwons j on j.buseosId = b.buseoId;
-select name,buseoName from buseos b, jikwons j where k.buseoId = b.buseoId;
+select name,buseoName from buseos join jikwons on jikwons.buseoId = buseos.buseoId;
+select name,buseoName from buseos b join jikwons j on j.buseoId = b.buseoId;
+select name,buseoName from buseos b, jikwons j where j.buseoId = b.buseoId;
 -- 앞의 경우처럼 참조하는 필드명이 같을경우 using절로 대처할수 있다.
-select name,buseoName from buseos b join jikwons j using (buseoId);
+select name,buseoName from buseos b join jikwons j using(buseoId);
 select * from buseos natural join jikwons;
 
 -- CROSS JOIN : 여러테이블의 발생할수 있는 경우를 모두 처리
+-- kwamoks 테이블 ------------
 create table kwamoks (
   kwamokId int not null,
   kwamokName varchar(10) not null
@@ -288,19 +292,18 @@ select * from students;
 select s.name, s.score, h.grade from students s join hakjum h on s.score between h.minScore and h.maxScore;
 select s.name, s.score, h.grade from students s, hakjum h where s.score between h.minScore and h.maxScore;
 
--- students2 테이블 -----------------
+-- students2 테이블 --------------
 create table students2 (
   hakbun int not null,
   name   varchar(10) not null,
   kwamokId int
 );
+delete from students2;
 
 insert into students2 values (101, '홍길동', 1);
 insert into students2 values (102, '이순신', 2);
 insert into students2 values (103, '임꺽정', default);
 insert into students2 values (103, '이기자', 2);
-
-select * from students2;
 
 -- kwamok2테이블 생성?
 create table kwamok2 (
@@ -315,15 +318,17 @@ select * from students2;
 select * from kwamok2;
 
 -- 학생명을 모두 출력하되, 해당 학생이 수강하는 과목명을 출력하시오.
-select s.name, k.kwamokName from students2 s, kwamok2 k where s.kwamokId = k.id; -- (x)
+select s.name, k.kwamokName from students2 s, kwamok2 k where s.kwamokId = k.id;	-- (X)
 select s.name, k.kwamokName from students2 s left join kwamok2 k on s.kwamokId = k.id;
 select s.name, k.kwamokName from students2 s right join kwamok2 k on s.kwamokId = k.id;
 
--- Full Outer Join : MySql에서 지원하지 않음.
+-- Full Outer Join : MySql에서는 지원하지 않음.
 select s.name, k.kwamokName from students2 s cross join kwamok2 k;
--- select s.name, k.kwamokName from students2 s Full Outer Join kwamok2 k; (x)
+-- select s.name, k.kwamokName from students2 s Full Outer Join kwamok2 k; (X)
 
--- Sub Query ----------------------
+-- Sub Query -----------------------
+
+-- jikmu 테이블 ------------
 select * from buseos;
 
 create table jikmu (
@@ -336,8 +341,7 @@ insert into jikmu values (10, 'J1');
 insert into jikmu values (20, 'J2');
 insert into jikmu values (30, 'J3');
 
-select * from jikmu;
-
+-- sawon테이블 -------------
 create table sawon(
   sabun int not null primary key,
   name  varchar(10) not null,
@@ -358,10 +362,10 @@ select * from jikmu;
 
 -- 급여가 전체 평균급여보다 많이 받는 직원들의 '이름'과 '급여'를 출력?
 -- 먼저 전체 급여평균?
-select fomat(avg(pay),0) from sawon;
+select format(avg(pay),0) from sawon;
 
 select name, pay from sawon;
-select name, pay from sawon where pay > avg(pay); -- (x)
+select name, pay from sawon where pay > avg(pay); -- (X)
 select name, pay from sawon where pay > (select avg(pay) from sawon);
 
 -- 앞의 직원들의 '이름'과 '급여'와 '직무코드'를 함께 출력하시오?
@@ -371,25 +375,25 @@ select s.name, s.pay, j.jikmuId from sawon s, jikmu j where (s.buseoId = j.buseo
 select * from buseos where jiyuk='서울';
 select buseoId from buseos where jiyuk='서울';
 
-select s.buseoId from buseos b, sawon s where b.buseoId = s.buseoId;
-select s.buseoId from buseos b, sawon s where (b.buseoId = s.buseoId) and s.buseoId in (select buseoId from buseos where jiyuk='서울');
-select distinct s.buseoId from buseos b, sawon s where (b.buseoId = s.buseoId) and s.buseoId in (select buseoId from buseos where jiyuk='서울');
+select s.buseoId, b.jiyuk from buseos b, sawon s where b.buseoId = s.buseoId;
+select s.buseoId, b.jiyuk from buseos b, sawon s where (b.buseoId = s.buseoId) and s.buseoId in (select buseoId from buseos where jiyuk='서울');
+select distinct s.buseoId, b.jiyuk from buseos b, sawon s where (b.buseoId = s.buseoId) and s.buseoId in (select buseoId from buseos where jiyuk='서울');
 
 -- 각 사원이 속한 성명,부서명을을 함께 출력하시오.
 select buseoId, buseoName from buseos;
-select s.name, b.buseoId, b.buseoName as 부서명 from sawon s,  buseos b where (s.buseoId = b.buseoId);
-select s.name, (select buseoName from buseos b where b.buseoId=s.buseoId) as 부서명 from sawon s; -- 스칼라 서브쿼리
+select s.name, b.buseoId, b.buseoName as 부서명 from sawon s, buseos b where (s.buseoId = b.buseoId);
+select s.name, (select buseoName from buseos b where b.buseoId=s.buseoId) as 부서명 from sawon s;	-- 스칼라 서브쿼리
 
--- 인라인 뷰(view) : 뷰의 장점: 논리적형태로 실제 존재하지 않음. 보안성(노출안됨), 독립성(구조변경시 일관성 유지), 편의성(별명사용시 쿼리 단순화)
--- '서울' 지역에 존재하는 부서에 근무하는 직원들의 이름과 해당 부서명을 출력하시오?
+-- 인라인 뷰(view) : 뷰의 장점:논리적형태로 실제 존재하지 않음. 보안성(노출안됨), 독립성(구조변경시 일관성 유지), 편의성(별명사용시 쿼리 단순화)
+-- '서울'지역에 존재하는 부서에 근무하는 직원들의 이름과 해당 부서명을 출력하시오?
 select s.name, b.buseoName from sawon s, (select buseoId, buseoName from buseos where jiyuk='서울') as b where s.buseoId=b.buseoId;
-select s.name, b.buseoName from sawon s, buseo b where (s.buseoId=b.buseoId) and b.jiyuk='서울';
+select s.name, b.buseoName from sawon s, buseos b where (s.buseoId=b.buseoId) and b.jiyuk='서울';
 
 -- 사원테이블에서 같은 부서의 월급이 해당부서의 최고월급보다 작은 사람들을 조회해보자.(성명, 급여)
 select max(s2.pay) from sawon s2 where s2.buseoId=10;
-select s.name, s.pay from sawon s1 where s1.pay < (select max(s2.pay) from sawon s2 where s2.buseoId=s1.buseoId);
+select s1.name, s1.pay from sawon s1 where s1.pay < (select max(s2.pay) from sawon s2 where s2.buseoId=s1.buseoId);
 
--- 집합연산자.....(합집합, 교집합 차집합)
+-- 집합연산자.....(합집합, 교집합, 차집합)
 -- students3테이블 만든다.
 create table students3 (
   name  varchar(10) not null,
@@ -416,19 +420,18 @@ select * from students4;
 -- 합집합 : UNION ALL - 중복허용
 select name,hakbun,major from students3 union all select * from students4;
 
--- 합집합 : UNION ALL - 중복불허
+-- 합집합 : UNION - 중복불허
 select name,hakbun,major from students3 union select * from students4;
 
 -- 교집합 : INTERSECT - 공통적인 자료 출력
 select name,hakbun,major from students3 INTERSECT select * from students4;
 
--- -------------순위 구함(RANK() ~ dver(정렬순서))-----------------------------------
-/* 90, 90, 80, 70, 60, 60
- RANK() : 1, 1, 3, 4, 5, 5, 7
- ROW_NUMBER() : 1,2,3,4,5,6,7
- DENSE_RANK() : 1, 1, 2, 3, 4, 4, 5
+-- -------순위 구함(RANK() ~ over(정렬순서))-----------------------------------------
+/*  90, 90, 80, 70, 60, 60, 50
+  RANK() : 1, 1, 3, 4, 5, 5, 7
+  ROW_NUMBER() : 1,2,3,4,5,6,7
+  DENSE_RANK() : 1, 1, 2, 3, 4, 4, 5
 */
-
 create table sungjuks (
   idx   int not null primary key auto_increment,
   name  varchar(10) not null,
@@ -457,7 +460,6 @@ select *,DENSE_RANK() over (order by jumsu desc) as 순위 from sungjuks;
   FIRST_VALUE() : 정렬 기준 첫번째 값을 참조
   LAST_VALUE() : 정렬 기준 마지막번째 값을 참조
 */
-
 -- 판매(panme2)테이블 생성
 create table panme2 (
   nalja  datetime not null,
@@ -471,12 +473,12 @@ insert into panme2 values ('2026-3-1', '김말숙', 300);
 insert into panme2 values ('2026-3-2', '김말숙', 350);
 insert into panme2 values ('2026-3-1', '이기자', 250);
 
-select * from panme2;
+SELECT * FROM panme2;
 
 -- 직원 오름차순으로 출력하되, 같은 직원의 경우는 마지막열에 이전(직전)매출을 표시하시오.
 select *, LAG(mechul) over (order BY jikwon) as 이전매출 from panme2;
 
--- 판매날짜 오름차순으로 출력하되, 같은 직원의 경우는 마지막열에 다음(직후)매출을 표시하시오.
+-- 판매날짜 오름차순으로 출력하되, 같은 직원의 경우는 마지막열에 다음(직전)매출을 표시하시오.
 select *, LAG(mechul) over (partition by jikwon order BY nalja) as 이전매출 from panme2;
 
 -- 판매날짜 오름차순으로 출력하되, 같은 직원의 경우는 마지막열에 다음(직후)매출을 표시하시오.
@@ -485,8 +487,8 @@ select *, LEAD(mechul) over (partition by jikwon order BY nalja) as 다음매출
 -- 판매날짜 오름차순으로 출력하되, 같은 직원의 경우는 마지막열에 해당직원의 첫 매출액을 표시하시오.
 select *, FIRST_VALUE(mechul) over (partition by jikwon order BY nalja) as 처음매출 from panme2;
 
--- LAST_VALUE는 '범위지정' 키워드 (ROWS BETWEEN 시작 AND 끝)
-select *, LAST_VALUE(mechul) over (partition by jikwon order BY nalja ROWS BETWEEN unbounded preceding AND unbounded following) as 마지막매출 from panme2;
+-- LAST_VALUE는 '범위지정' 키워드(ROWS BETWEEN 시작 AND 끝)
+select *, LAST_VALUE(mechul) over (partition by jikwon order BY nalja DESC ROWS BETWEEN unbounded preceding AND unbounded following) as 마지막매출 from panme2;
 
 -- 범위지정 연산자를 이용하여 '이동평균(자신+앞+뒤)'값을 구하시오.
-select *, avg(mechul) over (order by nalje rows between 1 preceding and 1 following) as 이동평균 from panme2;
+select *, avg(mechul) over (order by nalja rows between 1 preceding and 1 following) as 이동평균 from panme2;

@@ -10,35 +10,36 @@
   <title>adminMemberList.jsp</title>
   <%@ include file="/include/bs5.jsp" %>
   <script>
-  	'use strict';
-  	
-  	function levelChange(e) {
-  		let ans = confirm("선택한 회원의 등급을 변경하시겠습니까?");
-  		if(!ans) {
-  			location.reload();
-  			return false;
-  		}
-  		let imsi = e.value.split("/");
-  		let query = {
-  				level : imsi[0],
-  				idx 	: imsi[1]
-  		}
-  		
-  		$.ajax({
-  			url  : 'MemberLevelChange.ad',
-  			type : 'get',
-  			data : query,
-  			success:function(res) {
-  				if(res != '0') {
-  					//alert('등급 수정 완료');
-  					location.reload();
-  				}
-  				else alert("등급 수정 실패~~");
-  			},
-  			error : () => alert("전송오류~~")
-  		});
-  		
-  	}
+    'use strict';
+    
+    function levelChange(e) {
+    	let ans = confirm("선택한 회원의 등급을 변경하시겠습니까?");
+    	if(!ans) {
+    	  location.reload();
+    		return false;
+    	}
+  	  let imsi = e.value.split("/");
+    	let query = {
+    			level : imsi[0],
+    			idx   : imsi[1]
+    	}
+    	
+    	$.ajax({
+    		url  : 'MemberLevelChange.ad',
+    		type : 'get',
+    		data : query,
+    		success:function(res) {
+    			if(res != '0') {
+    				//alert('등급 수정 완료');
+    				location.reload();
+    			}
+    			else alert("등급 수정 실패~~");
+    		},
+    		error : () => alert("전송오류~~")
+    	});
+    	
+    }
+    
     // 전체선택
     function allCheck() {
       for(let i=0; i<myform.idxFlag.length; i++) {
@@ -61,8 +62,8 @@
     }
     
     // 선택회원 보기
-    function levelSelectctCheck() {
-    	let level = ("#levelSelect").val();
+    function levelSelectCheck() {
+    	let level = $("#levelSelect").val();
     	location.href = "AdminMemberList.ad?level="+level;
     }
   </script>
@@ -84,19 +85,17 @@
       <input type="button" value="선택항목등급변경" onclick="" class="btn btn-success btn-sm"/>
     </div>
 		<div class="col">
-    	<input type="button" value="새로고침" onclick="location.reload()" class="btn btn-warning form-control"/>
+    	<select name="levelSelect" id="levelSelect" class="form-select" onchange="levelSelectCheck()">
+    	  <option value="888" ${level == 888 ? 'selected' : ''}>전체보기</option>
+    	  <option value="1"   ${level == 1   ? 'selected' : ''}>준회원</option>
+    	  <option value="2"   ${level == 2   ? 'selected' : ''}>정회원</option>
+    	  <option value="3"   ${level == 3   ? 'selected' : ''}>우수회원</option>
+    	  <option value="99"  ${level == 99  ? 'selected' : ''}>탈퇴신청회원</option>
+    	  <option value="0"   ${level == 0   ? 'selected' : ''}>관리자</option>
+    	</select>
     </div>
   </div>
-  <div class="col">
-  	<select name="levelSelect" id="levelSelect" class="form-select" onchange="levelSelect">
-  		<option value="888" ${level == 888 ? 'selected' : ''}>전체보기</option>
-  		<option value="1"   ${level == 1 	 ? 'selected' : ''}>준회원</option>
-  		<option value="2"   ${level == 2   ? 'selected' : ''}>정회원</option>
-  		<option value="3"   ${level == 3   ? 'selected' : ''}>우수회원</option>
-  		<option value="99"  ${level == 99  ? 'selected' : ''}>탈퇴신청회원</option>
-  		<option value="0"   ${level == 0   ? 'selected' : ''}>관리자</option>
-  	</select>
-  </div>
+      
   <form name="myform">
 	  <table class="table table-hover">
 	    <tr class="table-secondary text-center">
@@ -111,10 +110,10 @@
 	    </tr>
 	    <c:forEach var="vo" items="${vos}" varStatus="st">
 	    	<tr class="text-center">
-	    		<td>
-	    		<c:if test="${vo.level != 0}"><input type="checkbox" name="idxFlag" id="idxFlag${vo.idx}" value="${vo.idx}" /></c:if>
-	    	  	${curScrStartNo}
-	    		</td>
+	    	  <td>
+	    	    <c:if test="${vo.level != 0}"><input type="checkbox" name="idxFlag" id="idxFlag${vo.idx}" value="${vo.idx}" /></c:if>
+	    	    ${curScrStartNo}
+	    	  </td>
 	    	  <td>${vo.nickName}</td>
 	    	  <td>${vo.mid}</td>
 	    	  <td>${vo.name}</td>
@@ -128,13 +127,13 @@
 	    	    </c:if>
 	    	  </td>
 	    	  <td>
-	    	  	<c:if test="${vo.level != 0}">
-	    	  	<select name="level" id="level" onchange='levelChange(this)'>
-	    	  		<option value="1/${vo.idx}" ${vo.level == 1 ? 'selected' : ''}>준회원</option>
-	    	  		<option value="2/${vo.idx}" ${vo.level == 2 ? 'selected' : ''}>정회원</option>
-	    	  		<option value="3/${vo.idx}" ${vo.level == 3 ? 'selected' : ''}>우수회원</option>
-	    	  		<option value="99/${vo.idx}" ${vo.level == 99 ? 'selected' : ''}>탈퇴신청회원</option>
-	    	  	</select>
+	    	    <c:if test="${vo.level != 0}">
+		    	  	<select name="level" id="level" onchange='levelChange(this)'>
+		    	  		<option value="1/${vo.idx}"  ${vo.level == 1 ? 'selected' : ''}>준회원</option>
+		    	  		<option value="2/${vo.idx}"  ${vo.level == 2 ? 'selected' : ''}>정회원</option>
+		    	  		<option value="3/${vo.idx}"  ${vo.level == 3 ? 'selected' : ''}>우수회원</option>
+		    	  		<option value="99/${vo.idx}" ${vo.level == 99 ? 'selected' : ''}>탈퇴신청회원</option>
+		    	  	</select>
 	    	  	</c:if>
 	    	  	<c:if test="${vo.level == 0}">관리자</c:if>
 	    	  </td>
@@ -142,7 +141,7 @@
 	    	<c:set var="curScrStartNo" value="${curScrStartNo - 1}"/>
 	    </c:forEach>
 	  </table>
- </form>
+  </form>
 </div>
 
 <!-- 블록페이지 시작 -->

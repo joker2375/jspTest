@@ -147,7 +147,7 @@ public class MemberDAO {
 	// 방문포인트 10 증가처리
 	public void setMemberPointPlus(String mid) {
 		try {
-			sql = "update member set point = point + 10, lastDate=now() where mid = ?";
+			sql = "update member set point = point + 10 where mid = ? and todayCnt <= 3";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mid);
 			pstmt.executeUpdate();
@@ -226,14 +226,14 @@ public class MemberDAO {
 	public int getTotRecCnt(String flag) {
 		int cnt = 0;
 		try {
-			if(flag.equals("u")) {
-				sql = "select count(*) as cnt from member  where userDel = 'NO'";
+		  if(flag.equals("u")) {
+				sql = "select count(*) as cnt from member where userDel = 'NO'";
 				pstmt = conn.prepareStatement(sql);
 			}
 			else {
 				int imsi = Integer.parseInt(flag);
 				if(imsi == 888)	{
-					sql = "select * from member";
+					sql = "select count(*) as cnt from member";
 					pstmt = conn.prepareStatement(sql);
 				}
 				else {
@@ -303,5 +303,84 @@ public class MemberDAO {
 		}
 		return res;
 	}
-}
 
+	// 방문 카운트 증가처리후, 포인트 자동 증가하기추가
+	public void setTodayCntCheck(String mid) {
+		try {
+			sql = "update member set todayCnt = if(date(lastDate)=curdate(), todayCnt+1, 1), lastDate=now() where mid = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.executeUpdate();
+			pstmtClose();
+			
+			sql = "update member set point = point + 10 where mid = ? and todayCnt <= 3";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL문 오류(setTodayCntCheck) : " + e.getMessage());
+		} finally {
+			pstmtClose();
+		}
+	}
+
+	// 회원 정보 수정처리
+	public int setMemberUpdateOk(MemberVO vo) {
+		int res = 0;
+		try {
+			sql = "update member set nickName=?,name=?,gender=?,birthday=?,tel=?,"
+					+ "address=?,email=?,homePage=?,job=?,hobby=?,photo=?,content=?,userInfor=? where mid=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getNickName());
+			pstmt.setString(2, vo.getName());
+			pstmt.setString(3, vo.getGender());
+			pstmt.setString(4, vo.getBirthday());
+			pstmt.setString(5, vo.getTel());
+			pstmt.setString(6, vo.getAddress());
+			pstmt.setString(7, vo.getEmail());
+			pstmt.setString(8, vo.getHomePage());
+			pstmt.setString(9, vo.getJob());
+			pstmt.setString(10, vo.getHobby());
+			pstmt.setString(11, vo.getPhoto());
+			pstmt.setString(12, vo.getContent());
+			pstmt.setString(13, vo.getUserInfor());
+			pstmt.setString(14, vo.getMid());
+			res = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("SQL문 오류(setMemberUpdateOk) : " + e.getMessage());
+		} finally {
+			pstmtClose();
+		}
+		return res;
+	}
+
+  // 방명록에 글쓴 횟수 처리
+  // 자동 등업(방명록에 5회 이상 글을 올렸을시 '준회원'에서 '정회원'으로 자동 등업처리(단, 방명록의 글은 하루에 여러번 등록해도 1회로 처리)
+	public int getGuestCnt(String mid, String name, String nickName, int level) {
+		int res = 0;
+		try {
+			if(level == 1) {
+				sql = "update member set level=2 where mid=? and "
+						+ "(select count(distinct date(visitDate)) from guest where name in (?, ?, ?)) >= 5";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, mid);
+				pstmt.setString(2, mid);
+				pstmt.setString(3, name);
+				pstmt.setString(4, nickName);
+				pstmt.executeUpdate();
+			}
+			sql = "select count(*) as cnt from guest where name in (?, ?, ?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.setString(2, name);
+			pstmt.setString(3, nickName);
+			rs = pstmt.executeQuery();
+			if(rs.next()) res = rs.getInt("cnt");
+		} catch (SQLException e) {
+			System.out.println("SQL문 오류(getGuestCnt) : " + e.getMessage());
+		} finally {
+			pstmtClose();
+		}
+		return res;
+	}
+}

@@ -1,6 +1,6 @@
-a {text-decoration: nane}
+a {text-decoration: none !important;}
 
 a:hover {
-		text-decoration: underLine;
-		color: orange;
+		text-decoration: underline !important;
+		color: orange !important;
 }

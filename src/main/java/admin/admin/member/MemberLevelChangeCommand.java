@@ -1,4 +1,4 @@
-package study2.modal;
+package admin.admin.member;
 
 import java.io.IOException;
 
@@ -6,21 +6,22 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import guest.GuestInterface;
+import admin.AdminInterface;
 import member.MemberDAO;
-import member.MemberVO;
 
-public class ModalFormOkheckCommand implements GuestInterface {
+public class MemberLevelChangeCommand implements AdminInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String mid = request.getParameter("mid")==null ? "" : request.getParameter("mid");
+		int idx = Integer.parseInt(request.getParameter("idx"));
+		int level = Integer.parseInt(request.getParameter("level"));
 		
 		MemberDAO dao = new MemberDAO();
 		
-		MemberVO vo = dao.getMemberIdCheck(mid);
+		int res = dao.setMemberLevelChange(idx, level);
+		
+		response.getWriter().write(res + "");
 
-		request.setAttribute("vo", vo);
 	}
 
 }

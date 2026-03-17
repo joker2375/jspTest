@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.44, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: springgreen
+-- Host: localhost    Database: springgreen
 -- ------------------------------------------------------
 -- Server version	8.0.44
 
@@ -130,7 +130,7 @@ CREATE TABLE `hoewon` (
   `gender` char(2) DEFAULT '여자',
   `address` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`idx`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,7 +139,7 @@ CREATE TABLE `hoewon` (
 
 LOCK TABLES `hoewon` WRITE;
 /*!40000 ALTER TABLE `hoewon` DISABLE KEYS */;
-INSERT INTO `hoewon` VALUES (1,'홍길동',25,'남자','서울'),(2,'김말숙',55,'남자','울산'),(3,'이기자',39,'남자','제주'),(6,'아톰',22,'여자','서울'),(7,'비톰맨',44,'남자','제주'),(8,'씨톰',20,'여자','서울'),(10,'디톰',20,'여자',NULL),(11,'씨톰',20,'여자',NULL);
+INSERT INTO `hoewon` VALUES (1,'홍길동',25,'남자','서울'),(2,'김말숙',55,'남자','울산'),(3,'이기자',39,'남자','제주'),(6,'아톰',33,'남자','제주'),(7,'비톰맨',44,'남자','청주'),(8,'씨톰',20,'여자','서울');
 /*!40000 ALTER TABLE `hoewon` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,7 +157,7 @@ CREATE TABLE `insa` (
   `gender` char(2) DEFAULT '여자',
   `ipsail` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idx`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,37 +166,36 @@ CREATE TABLE `insa` (
 
 LOCK TABLES `insa` WRITE;
 /*!40000 ALTER TABLE `insa` DISABLE KEYS */;
-INSERT INTO `insa` VALUES (1,'홍길동',20,'남자','2026-01-23 13:49:41'),(2,'김말숙',20,'여자','2026-01-23 13:49:42'),(3,'김연아',20,'여자','2026-01-23 13:49:43'),(4,'홍길순',33,'여자','2023-05-06 00:00:00'),(5,'이겨라',28,'여자','2023-04-04 00:00:00'),(7,'아톰',11,'여자','2025-05-05 00:00:00'),(8,'비톰',12,'남자','2025-02-02 00:00:00'),(9,'씨톰',13,'남자','2025-03-03 00:00:00'),(10,'디톡스',14,'여자','2025-04-04 00:00:00'),(11,'조나단',15,'남자','2025-06-06 00:00:00'),(12,'햄스터',16,'여자','2025-07-07 00:00:00'),(13,'짱구',17,'남자','2025-08-08 00:00:00'),(14,'유리',18,'여자','2025-09-09 00:00:00'),(15,'이슬이',19,'여자','2025-10-10 00:00:00'),(16,'퉁퉁이',20,'남자','2025-11-11 00:00:00'),(17,'퉁순이',21,'여자','2025-12-12 00:00:00'),(18,'노진구',22,'남자','2025-01-02 00:00:00'),(19,'맹구',23,'남자','2025-01-03 00:00:00'),(20,'철수',24,'남자','2025-01-04 00:00:00');
+INSERT INTO `insa` VALUES (1,'홍길동',20,'남자','2026-01-23 13:48:03'),(2,'김말숙',20,'여자','2026-01-23 13:48:04'),(3,'김연아',20,'여자','2026-01-23 13:48:05'),(4,'홍길순',33,'여자','2023-05-06 00:00:00'),(5,'이겨라',28,'남자','2023-04-04 00:00:00'),(7,'atom',12,'여자','2024-05-10 00:00:00'),(8,'비톰',23,'남자','2015-02-02 00:00:00'),(9,'ctom',34,'여자','2021-12-21 00:00:00'),(10,'디톰',45,'여자','2016-05-11 00:00:00'),(11,'etom',32,'여자','2025-12-23 00:00:00'),(12,'ftom',44,'남자','2003-09-10 00:00:00'),(13,'gtom',19,'남자','2023-03-08 00:00:00'),(14,'htom',32,'여자','2026-05-07 00:00:00'),(15,'jtom',32,'여자','2013-09-01 00:00:00'),(16,'aaaa',23,'여자','2025-04-04 00:00:00'),(17,'bbbb',33,'여자','2020-04-08 00:00:00'),(18,'cccc',35,'남자','2017-04-06 00:00:00');
 /*!40000 ALTER TABLE `insa` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `jcrane`
+-- Table structure for table `insa2`
 --
 
-DROP TABLE IF EXISTS `jcrane`;
+DROP TABLE IF EXISTS `insa2`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `jcrane` (
+CREATE TABLE `insa2` (
   `idx` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `spec` varchar(100) DEFAULT NULL,
-  `price` int DEFAULT NULL,
-  `state` varchar(10) DEFAULT '대기',
-  `image` varchar(100) DEFAULT NULL,
-  `memo` text,
-  `indate` datetime DEFAULT CURRENT_TIMESTAMP,
+  `name` varchar(20) NOT NULL,
+  `age` int DEFAULT '20',
+  `gender` char(2) DEFAULT '여자',
+  `ipsail` datetime DEFAULT CURRENT_TIMESTAMP,
+  `photo` varchar(50) DEFAULT 'noimage.jpg',
   PRIMARY KEY (`idx`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `jcrane`
+-- Dumping data for table `insa2`
 --
 
-LOCK TABLES `jcrane` WRITE;
-/*!40000 ALTER TABLE `jcrane` DISABLE KEYS */;
-/*!40000 ALTER TABLE `jcrane` ENABLE KEYS */;
+LOCK TABLES `insa2` WRITE;
+/*!40000 ALTER TABLE `insa2` DISABLE KEYS */;
+INSERT INTO `insa2` VALUES (1,'홍길동',22,'남자','2026-11-26 00:00:00',''),(2,'김말숙',20,'여자','2026-01-26 20:44:19','noimage.jpg'),(3,'김연아',20,'여자','2026-01-26 20:44:20','noimage.jpg'),(4,'atom',12,'여자','2025-04-04 00:00:00','noimage.jpg'),(5,'btom',32,'여자','2026-04-01 00:00:00','noimage.jpg'),(8,'itom',32,'여자','2026-01-01 00:00:00','소리설정.jpg'),(9,'jtom',55,'남자','2025-05-01 00:00:00','noimage.jpg'),(10,'ktom',77,'여자','2023-01-04 00:00:00','소리설정.jpg'),(11,'ltom',43,'여자','2026-01-01 00:00:00','소리설정_b.jpg'),(12,'mtom',22,'여자','2026-04-01 00:00:00','noimage.jpg'),(13,'otom',32,'남자','2026-03-01 00:00:00','20251123_151927.jpg'),(14,'ptom',1234,'남자','2025-01-02 00:00:00','소리설정_b.jpg'),(16,'rtom',33,'여자','2026-01-01 00:00:00','aws1260126094220.jpg'),(17,'stom',55,'여자','2026-01-01 00:00:00','aws1_260126094319.jpg'),(18,'ttom',1234,'여자','2026-01-01 00:00:00','aws1.jpg'),(20,'ytom',55,'여자','2024-03-08 00:00:00','b5b7208f-6f5f-4af3-9f47-f08dd8519508.png'),(21,'xtom',11,'여자','2024-01-01 00:00:00','7.jpg');
+/*!40000 ALTER TABLE `insa2` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -296,8 +295,31 @@ CREATE TABLE `jobs` (
 
 LOCK TABLES `jobs` WRITE;
 /*!40000 ALTER TABLE `jobs` DISABLE KEYS */;
-INSERT INTO `jobs` VALUES (1,NULL),(2,'공무원'),(3,'회사원'),(4,'학생'),(5,NULL),(6,'자영업'),(7,NULL);
+INSERT INTO `jobs` VALUES (2,'공무원'),(3,'회사원'),(4,'학생'),(5,NULL),(6,'자영업'),(7,NULL),(1,NULL);
 /*!40000 ALTER TABLE `jobs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jproduct`
+--
+
+DROP TABLE IF EXISTS `jproduct`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `jproduct` (
+  `idx` int NOT NULL AUTO_INCREMENT,
+  `content` text,
+  PRIMARY KEY (`idx`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `jproduct`
+--
+
+LOCK TABLES `jproduct` WRITE;
+/*!40000 ALTER TABLE `jproduct` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jproduct` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -341,7 +363,7 @@ CREATE TABLE `kwamok` (
 
 LOCK TABLES `kwamok` WRITE;
 /*!40000 ALTER TABLE `kwamok` DISABLE KEYS */;
-INSERT INTO `kwamok` VALUES (201),(201),(202),(203),(204),(205);
+INSERT INTO `kwamok` VALUES (201),(202),(203),(204),(205);
 /*!40000 ALTER TABLE `kwamok` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -485,7 +507,7 @@ CREATE TABLE `salary` (
   `overtime` int DEFAULT '0',
   `netpay` int NOT NULL,
   PRIMARY KEY (`idx`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -494,7 +516,7 @@ CREATE TABLE `salary` (
 
 LOCK TABLES `salary` WRITE;
 /*!40000 ALTER TABLE `salary` DISABLE KEYS */;
-INSERT INTO `salary` VALUES (1,'CK05','홍길순','총무과','과장',6,2412000),(2,'SS03','나가자','생산과','사원',6,1512000),(3,'SS02','김빛나','생산과','사원',9,1593000),(4,'YB01','영원히','영업과','부장',1,2727000),(5,'IB01','강감찬','인사과','부장',2,2754000),(6,'IB02','아톰맨','인사과','부장',3,2781000),(7,'CS06','씨톰','총무과','사원',3,1431000);
+INSERT INTO `salary` VALUES (2,'CK05','홍길순','총무과','과장',6,2385000),(3,'SS03','나가자','생산과','사원',6,1512000),(4,'SS02','김빛나','생산과','사원',9,1593000),(5,'YB01','영원히','영업과','부장',1,2727000),(6,'IB01','강감찬','인사과','부장',2,2754000),(7,'IB02','아톰맨','인사과','부장',3,2781000),(8,'CS06','씨톰','총무과','사원',3,1431000);
 /*!40000 ALTER TABLE `salary` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -662,8 +684,7 @@ CREATE TABLE `test` (
   `age` int DEFAULT '20',
   `gender` char(2) DEFAULT '여자',
   `ipsail` datetime DEFAULT CURRENT_TIMESTAMP,
-  `address` varchar(50) DEFAULT NULL,
-  `job` varchar(10) DEFAULT NULL
+  `address` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -673,7 +694,7 @@ CREATE TABLE `test` (
 
 LOCK TABLES `test` WRITE;
 /*!40000 ALTER TABLE `test` DISABLE KEYS */;
-INSERT INTO `test` VALUES ('김장미',20,'여자','2026-01-16 09:08:08','서울',NULL),('김말숙',30,'여자','2020-02-01 00:00:00','인천',NULL),('김말숙',30,'여자','2020-02-01 00:00:00','인천',NULL),('오하늘',58,'여자','2000-02-01 00:00:00','청주',NULL),('이순신',42,'남자','2024-09-09 00:00:00','서울',NULL),('소나무',34,'남자','2023-06-25 00:00:00','울산',NULL),('가나다',20,'남자','2000-10-01 00:00:00','광주',NULL),('강감찬',50,'남자','2026-01-16 09:08:29','제주',NULL),('홍길동',20,'남자','2026-01-16 09:08:30','청주',NULL);
+INSERT INTO `test` VALUES ('강감찬',50,'남자','2026-01-15 18:02:13','제주'),('가나다',20,'남자','2000-10-01 00:00:00','광주'),('소나무',34,'남자','2023-06-25 00:00:00','울산'),('이순신',42,'남자','2024-09-09 00:00:00','서울'),('오하늘',58,'여자','2000-02-01 00:00:00','청주'),('오하늘',58,'여자','2000-02-01 00:00:00','청주'),('강감찬',50,'남자','2026-01-16 09:01:00','제주'),('가나다',20,'남자','2000-10-01 00:00:00','광주'),('소나무',34,'남자','2023-06-25 00:00:00','울산'),('이순신',42,'남자','2024-09-09 00:00:00','서울'),('오하늘',58,'여자','2000-02-01 00:00:00','청주');
 /*!40000 ALTER TABLE `test` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -691,7 +712,7 @@ CREATE TABLE `test2` (
   `gender` char(2) NOT NULL DEFAULT '남자',
   `address` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`idx`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -700,7 +721,7 @@ CREATE TABLE `test2` (
 
 LOCK TABLES `test2` WRITE;
 /*!40000 ALTER TABLE `test2` DISABLE KEYS */;
-INSERT INTO `test2` VALUES (1,'홍길동',20,'남자',NULL),(2,'',20,'남자',NULL),(3,'',0,'남자',NULL),(4,'김말숙',20,'여자',''),(6,'김연아',29,'남자','서울'),(7,'소나무',55,'남자','청주'),(8,'오하늘',39,'여자','서울'),(9,'가나다',39,'여자','제주'),(10,'고인돌',39,'남자','광주'),(11,'아톰',19,'여자','청주'),(12,'비톰',44,'남자','제주'),(14,'시톰',46,'여자','서울'),(15,'연습맨',20,'남자',NULL),(16,'연습맨2',39,'여자','청주');
+INSERT INTO `test2` VALUES (1,'홍길동',20,'남자',NULL),(2,'',20,'남자',NULL),(3,'',0,'남자',NULL),(4,'에프톰',20,'남자',NULL),(5,'김말숙',20,'여자',''),(7,'김연아',29,'남자','서울'),(8,'소나무',55,'남자','청주'),(9,'오하늘',39,'여자','서울'),(10,'가나다',39,'여자','제주'),(11,'고인돌',39,'남자','광주'),(12,'아톰',19,'여자','청주'),(13,'비톰',44,'남자','제주'),(16,'씨톰',46,'여자','서울'),(17,'연습맨',20,'남자',NULL),(18,'연습맨2',39,'여자','청주');
 /*!40000 ALTER TABLE `test2` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -718,7 +739,7 @@ CREATE TABLE `test3` (
   `age` int DEFAULT NULL,
   PRIMARY KEY (`idx`),
   UNIQUE KEY `mid` (`mid`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -727,8 +748,36 @@ CREATE TABLE `test3` (
 
 LOCK TABLES `test3` WRITE;
 /*!40000 ALTER TABLE `test3` DISABLE KEYS */;
-INSERT INTO `test3` VALUES (1,'hkd1234','홍길동',25),(3,'hks1234','홍길순',22);
+INSERT INTO `test3` VALUES (1,'hkd1234','홍길동',25),(2,'hks1234','홍길순',22),(3,'lkj1234','이기자',12);
 /*!40000 ALTER TABLE `test3` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `test4`
+--
+
+DROP TABLE IF EXISTS `test4`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `test4` (
+  `idx` int NOT NULL AUTO_INCREMENT,
+  `mid` varchar(20) NOT NULL,
+  `bookName` varchar(20) NOT NULL,
+  `price` int DEFAULT NULL,
+  PRIMARY KEY (`idx`),
+  KEY `mid` (`mid`),
+  CONSTRAINT `test4_ibfk_1` FOREIGN KEY (`mid`) REFERENCES `test3` (`mid`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `test4`
+--
+
+LOCK TABLES `test4` WRITE;
+/*!40000 ALTER TABLE `test4` DISABLE KEYS */;
+INSERT INTO `test4` VALUES (2,'lkj1234','노인과바다',10000),(3,'hkd1234','노을저편',25000);
+/*!40000 ALTER TABLE `test4` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -740,4 +789,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-03-06 17:10:30
+-- Dump completed on 2026-03-06 17:10:29

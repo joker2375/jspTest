@@ -18,3 +18,7 @@ select * from guest;
 select * from guest order by idx desc;
 select * from guest order by idx desc limit 5;
 select * from guest order by idx desc limit 0, 3;
+
+select count(*) as cnt from guest where name in ('admin', '관리자', '관리맨');
+select count(distinct date(visitDate)) as cnt from guest where name in ('admin', '관리자', '관리맨');
+select count(distinct date(visitDate)) from guest where name in ('btom1234', '비톰', '비톰맨');
